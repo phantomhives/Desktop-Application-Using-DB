@@ -5,7 +5,9 @@
  */
 package BLL;
 
+import DAO.Department;
 import DLL.DepartmentDLL;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,12 +15,16 @@ import DLL.DepartmentDLL;
  */
 public class DepartmentBLL {
     
-    private DepartmentDLL departmentDLL;
+    private final DepartmentDLL departmentDLL;
 
     public DepartmentBLL() {
         this.departmentDLL = new DepartmentDLL();
     }
 
+    
+    public ArrayList<Department> getAllDepartment(){
+        return departmentDLL.getAllDepartment();
+    }
   
     
 }

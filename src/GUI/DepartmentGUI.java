@@ -5,6 +5,12 @@
  */
 package GUI;
 
+import BLL.DepartmentBLL;
+import DAO.Department;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author shusa
@@ -14,8 +20,11 @@ public class DepartmentGUI extends javax.swing.JFrame {
     /**
      * Creates new form DepartmentGUI
      */
+    private DepartmentBLL departmentBLL;
     public DepartmentGUI() {
         initComponents();
+        this.departmentBLL = new DepartmentBLL();
+        generateDepartmentList();
     }
 
     /**
@@ -200,4 +209,32 @@ public class DepartmentGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void generateDepartmentList(){
+       
+        try {
+            String[] columnNames = {"ID","NAME","CODE"};
+            DefaultTableModel model= new DefaultTableModel();
+            ShowDepartmentTable.setEnabled(false);
+            model.fireTableDataChanged();
+            model.setColumnIdentifiers(columnNames);
+            
+            ShowDepartmentTable.setModel(model);
+            Iterator<Department> iterator = this.departmentBLL.getAllDepartment().iterator();
+            while (iterator.hasNext()) {
+                Department aDepartment = iterator.next();
+                model.addRow(new Object[]{aDepartment.getDepartment_id(),
+                    aDepartment.getDepartment_name(),aDepartment.getDepartment_code()});    
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
+    }
+
+  
+  
+  
+
+   
+
 }
