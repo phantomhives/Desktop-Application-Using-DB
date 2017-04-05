@@ -62,4 +62,48 @@ public class DepartmentDLL extends DB{
         }
         return false;
     }
+
+    public boolean checkNameAllreadyExists(Department aDepartment) {
+        boolean info = false;
+         try {
+            this.setConnection();
+            
+            String qurey = "SELECT * FROM `department` WHERE department_name=?";
+            this.statement = this.connection.prepareStatement(qurey);
+            this.statement.setString(1,aDepartment.getDepartment_name());
+            this.resultSet = this.statement.executeQuery();
+            if(this.resultSet.next()){
+                info = true;
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+          
+        }finally {
+            this.DisconnectFromDb();
+        }
+         return info;
+    }
+    
+    public boolean checkCodeAllreadyExists(Department aDepartment) {
+        boolean info = false;
+         try {
+            this.setConnection();
+            
+            String qurey = "SELECT * FROM `department` WHERE department_code=?";
+            this.statement = this.connection.prepareStatement(qurey);
+            this.statement.setString(1,aDepartment.getDepartment_code());
+            this.resultSet = this.statement.executeQuery();
+            if(this.resultSet.next()){
+                info = true;
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+          
+        }finally {
+            this.DisconnectFromDb();
+        }
+         return info;
+    }
 }
