@@ -26,5 +26,11 @@ public class DepartmentBLL {
         return departmentDLL.getAllDepartment();
     }
   
+    public String saveDepartment(Department aDepartment){
+        if(this.departmentDLL.saveDepartment(aDepartment)){
+            return "Department insert successfully";
+        }
+        return "something wrong";
+    }
     
 }

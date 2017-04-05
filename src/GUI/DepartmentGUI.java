@@ -70,6 +70,11 @@ public class DepartmentGUI extends javax.swing.JFrame {
         jLabel2.setText("Code");
 
         SaveButton.setText("Save");
+        SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -160,6 +165,16 @@ public class DepartmentGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+        // TODO add your handling code here:
+        String name = DepartmentNameTextBox.getText();
+        String code = DepartmentCodeTextBox.getText();
+        
+        Department aDepartment = new Department(name,code);
+        JOptionPane.showMessageDialog(rootPane,this.departmentBLL.saveDepartment(aDepartment));
+        generateDepartmentList();
+    }//GEN-LAST:event_SaveButtonActionPerformed
 
     /**
      * @param args the command line arguments

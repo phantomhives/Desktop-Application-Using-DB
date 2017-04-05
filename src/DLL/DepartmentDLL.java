@@ -41,5 +41,25 @@ public class DepartmentDLL extends DB{
             this.DisconnectFromDb();
         }
         return departments;
-    }   
+    }
+    
+    public boolean saveDepartment(Department aDepartment){
+        this.setConnection();
+        int count = 0 ;
+        try {
+            String qurey = "INSERT INTO department(department_name,department_code) VALUES(?,?)";
+            this.statement = this.connection.prepareStatement(qurey);
+            this.statement.setString(1, aDepartment.getDepartment_name());
+            this.statement.setString(2, aDepartment.getDepartment_code());
+            count = this.statement.executeUpdate();
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally{
+            this.DisconnectFromDb();
+        }
+        if(count>0){
+            return true;
+        }
+        return false;
+    }
 }
